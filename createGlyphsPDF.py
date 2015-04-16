@@ -2,14 +2,18 @@ from fontTools.pens.cocoaPen import CocoaPen
 
 # Some configuration
 page_format = 'A4' # See http://drawbot.readthedocs.org/content/canvas/pages.html#size for other size-values
+margins = (50,50,50,50) # left, top, right, bottom
 my_selection = CurrentFont() # May also be CurrentFont.selection or else
+
+# Init
+size(page_format)
 
 
 class RegisterGlyph(object):
     
     def __init__(self, glyph):
         self.glyph = glyph
-        print 'Registered glyph:', self.glyph.name
+        #print 'Registered glyph:', self.glyph.name
         
         self.proportion_ratio = self.getProportionRatio()
     
@@ -22,7 +26,8 @@ class RegisterGlyph(object):
         return ratio
         
     def drawGlyphOnNewPage(self):
-        newPage(page_format)
+        newPage()
+        print 
         self._drawGlyph()
     
     def _drawGlyph(self):
