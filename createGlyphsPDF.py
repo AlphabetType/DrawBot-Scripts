@@ -19,12 +19,17 @@ class RegisterGlyph(object):
         
         return ratio
         
-    def createPage(self):
+    def drawGlyphOnNewPage(self):
         newPage(page_format)
+    
+    def _drawGlyph(self):
+        pen = CocoaPen(self.glyph.getParent())
+        self.glyph.draw(pen)
+        drawPath(pen.path)
         
         
 
 for g in my_selection:
     glyph = RegisterGlyph(g)
-    # glyph.createPage()
+    glyph.drawGlyphOnNewPage()
 
