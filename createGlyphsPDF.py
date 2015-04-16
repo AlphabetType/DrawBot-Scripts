@@ -12,10 +12,10 @@ page_height = height()
 
 # Drawbox Settings
 drawbox = {}
-drawbox['left_margin'] = 0
-drawbox['top_margin'] = 0
-drawbox['right_margin'] = 0
-drawbox['bottom_margin'] = 0
+drawbox['left_margin'] = 50
+drawbox['top_margin'] = 50
+drawbox['right_margin'] = 50
+drawbox['bottom_margin'] = 200
 drawbox['xMin'] = drawbox['left_margin']
 drawbox['yMin'] = drawbox['bottom_margin']
 drawbox['xMax'] = page_width - drawbox['right_margin']
@@ -28,7 +28,7 @@ print drawbox
 
 def showPageMargins():
     fill(None)
-    stroke(1, 0, 0, .3)
+    stroke(0, 0, 1, .1)
     rect(drawbox['xMin'], drawbox['yMin'], drawbox['width'], drawbox['height'])
 
 
@@ -65,16 +65,16 @@ class RegisterGlyph(object):
         rect(drawbox['xMin'], drawbox['yMin'], self.glyph.width*sc, UPM*sc)
     
     def drawXHeight(self):
-        stroke(255,0,0)
-        line((drawbox['yMin'], self.xHeight_pos*sc), (self.glyph.width*sc, self.xHeight_pos*sc))
+        stroke(0,0,255)
+        line((drawbox['xMin'], drawbox['yMin'] + self.xHeight_pos*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + self.xHeight_pos*sc))
     
     def drawCapHeight(self):
         stroke(255,0,0)
-        line((drawbox['yMin'], self.capHeight_pos*sc), (self.glyph.width*sc, self.capHeight_pos*sc))
+        line((drawbox['xMin'], drawbox['yMin'] + self.capHeight_pos*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + self.capHeight_pos*sc))
     
     def drawBaseline(self):
-        stroke(255, 0, 0)
-        line((drawbox['yMin'], abs(descender)*sc), (self.glyph.width*sc, abs(descender)*sc))
+        stroke(0, 1, 0)
+        line((drawbox['xMin'], drawbox['yMin'] + abs(descender)*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + abs(descender)*sc))
     
     def drawLeftMargin(self):
         stroke(None)
@@ -84,7 +84,7 @@ class RegisterGlyph(object):
     def drawRightMargin(self):
         stroke(None)
         fill(255,0,0,0.5)
-        rect((self.glyph.width - self.glyph.rightMargin)*sc, drawbox['yMin'], self.glyph.rightMargin*sc, UPM*sc)
+        rect(drawbox['xMin'] + (self.glyph.width - self.glyph.rightMargin)*sc, drawbox['yMin'], self.glyph.rightMargin*sc, UPM*sc)
         #rect((drawbox['xMax'] - self.glyph.rightMargin)*sc, drawbox['yMin'], self.glyph.width*sc, UPM*sc)
         
 
@@ -97,11 +97,9 @@ class RegisterGlyph(object):
         save()
         stroke(None)
         fill(0)
-        scale(sc)
-        # Move to box
-        # Keep in mind that you don’t have to use sc here, since everything is scaled now
-        # TO DO: I may use the scale globally in this class?!
-        translate(0, abs(descender))
+        translate(drawbox['xMin'], 0)
+        translate(0, drawbox['yMin'] + abs(descender)*sc)
+        scale(sc)        
         
         self._drawGlyph()
         restore()
