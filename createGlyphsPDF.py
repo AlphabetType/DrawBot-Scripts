@@ -1,3 +1,5 @@
+from fontTools.pens.cocoaPen import CocoaPen
+
 # Some configuration
 page_format = 'A4' # See http://drawbot.readthedocs.org/content/canvas/pages.html#size for other size-values
 my_selection = CurrentFont() # May also be CurrentFont.selection or else
@@ -21,6 +23,7 @@ class RegisterGlyph(object):
         
     def drawGlyphOnNewPage(self):
         newPage(page_format)
+        self._drawGlyph()
     
     def _drawGlyph(self):
         pen = CocoaPen(self.glyph.getParent())
@@ -29,7 +32,8 @@ class RegisterGlyph(object):
         
         
 
-for g in my_selection:
-    glyph = RegisterGlyph(g)
-    glyph.drawGlyphOnNewPage()
+for g in my_selection: 
+    if len(g) > 0: # Ignore whitespace glyphs
+        glyph = RegisterGlyph(g)
+        glyph.drawGlyphOnNewPage()
 
