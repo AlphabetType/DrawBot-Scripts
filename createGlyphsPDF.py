@@ -103,6 +103,18 @@ class RegisterGlyph(object):
         
         self._drawGlyph()
         restore()
+    
+    def center(self, horizontal=True, vertical=True):
+        print 'center'
+        offset_x = 0
+        offset_y = 0
+        if horizontal:
+            offset_x = (drawbox['width'] - self.glyph.width*sc)/2
+        
+        if vertical:
+            offset_y = (drawbox['height'] - UPM*sc)/2
+        
+        translate(offset_x, offset_y)
         
         
     
@@ -142,6 +154,7 @@ for g in my_selection:
     if len(g) > 0: # Ignore whitespace glyphs
         glyph = RegisterGlyph(g)
         glyph.addNewPage()
+        glyph.center()
         glyph.drawLeftMargin()
         glyph.drawRightMargin()
         glyph.drawGlyph()
