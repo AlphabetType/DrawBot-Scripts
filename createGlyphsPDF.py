@@ -7,12 +7,18 @@ class RegisterGlyph(object):
     
     def __init__(self, glyph):
         self.glyph = glyph
-        print 'Registered', self.glyph.name
+        print 'Registered glyph:', self.glyph.name
+        
         self.proportion_ratio = self.getProportionRatio()
     
     def getProportionRatio(self):
-        print self.glyph.width
-    
+        xMin, yMin, xMax, yMax = self.glyph.box
+        self.w = xMax - xMin 
+        self.h = yMax - yMin
+        ratio = self.w/self.h
+        
+        return ratio
+        
     def createPage(self):
         newPage(page_format)
         
@@ -20,5 +26,5 @@ class RegisterGlyph(object):
 
 for g in my_selection:
     glyph = RegisterGlyph(g)
-    glyph.createPage()
+    # glyph.createPage()
 
