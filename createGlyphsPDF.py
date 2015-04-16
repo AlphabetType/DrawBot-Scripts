@@ -1,6 +1,6 @@
 # Some configuration
-page_format = 'A4'
-newPage(page_format)
+page_format = 'A4' # See http://drawbot.readthedocs.org/content/canvas/pages.html#size for other size-values
+my_selection = CurrentFont() # May also be CurrentFont.selection or else
 
 
 class RegisterGlyph(object):
@@ -12,9 +12,13 @@ class RegisterGlyph(object):
     
     def getProportionRatio(self):
         print self.glyph.width
+    
+    def createPage(self):
+        newPage(page_format)
         
         
 
-for g in CurrentFont():
+for g in my_selection:
     glyph = RegisterGlyph(g)
+    glyph.createPage()
 
