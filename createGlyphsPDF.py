@@ -7,6 +7,16 @@ my_selection = CurrentFont() # May also be CurrentFont.selection or else
 
 # Init
 size(page_format)
+page_width = width()
+page_height = height()
+drawbox = {
+    'xMin': margins[0],
+    'yMin': margins[3],
+    'width': page_width - margins[0] - margins[2],
+    'height': page_height - margins[1] - margins[3]
+    }
+
+
 
 
 class RegisterGlyph(object):
