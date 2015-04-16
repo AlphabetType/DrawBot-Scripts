@@ -15,7 +15,7 @@ drawbox = {}
 drawbox['left_margin'] = 50
 drawbox['top_margin'] = 50
 drawbox['right_margin'] = 50
-drawbox['bottom_margin'] = 200
+drawbox['bottom_margin'] = 50
 drawbox['xMin'] = drawbox['left_margin']
 drawbox['yMin'] = drawbox['bottom_margin']
 drawbox['xMax'] = page_width - drawbox['right_margin']
@@ -23,8 +23,6 @@ drawbox['yMax'] = page_width - drawbox['top_margin']
 drawbox['width'] = page_width - drawbox['left_margin'] - drawbox['right_margin']
 drawbox['height'] = page_height - drawbox['bottom_margin'] - drawbox['top_margin']
 
-
-print drawbox
 
 def showPageMargins():
     fill(None)
@@ -48,7 +46,6 @@ class RegisterGlyph(object):
         self.xHeight_pos = xHeight + abs(descender)
         self.capHeight_pos = capHeight + abs(descender)
         self.x_pos = self.glyph.leftMargin + drawbox['xMin']
-        print self.x_pos
         
         #print self.xMin, self.yMin, self.xMax, self.yMax
     
@@ -105,7 +102,6 @@ class RegisterGlyph(object):
         restore()
     
     def center(self, horizontal=True, vertical=True):
-        print 'center'
         offset_x = 0
         offset_y = 0
         if horizontal:
@@ -154,12 +150,12 @@ for g in my_selection:
     if len(g) > 0: # Ignore whitespace glyphs
         glyph = RegisterGlyph(g)
         glyph.addNewPage()
-        glyph.center()
+        # Just uncomment any of the following methods if you don't want them to be drawn
+        glyph.center(True, True)
         glyph.drawLeftMargin()
         glyph.drawRightMargin()
         glyph.drawGlyph()
         glyph.drawBoundingBox()
-        
         glyph.drawBaseline()
         glyph.drawXHeight()
         glyph.drawCapHeight()
