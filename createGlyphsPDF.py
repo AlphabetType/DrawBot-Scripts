@@ -2,7 +2,6 @@ from fontTools.pens.cocoaPen import CocoaPen
 
 # Some configuration
 page_format = 'A4' # See http://drawbot.readthedocs.org/content/canvas/pages.html#size for other size-values
-margins = (0,0,0,0) # left, top, right, bottom
 my_selection = CurrentFont() # May also be CurrentFont.selection or else
 
 # Init
@@ -10,14 +9,20 @@ font = CurrentFont()
 size(page_format)
 page_width = width()
 page_height = height()
-drawbox = {
-    'xMin': margins[0],
-    'yMin': margins[3],
-    'xMax': page_width - margins[2],
-    'yMax': page_width - margins[1],
-    'width': page_width - margins[0] - margins[2],
-    'height': page_height - margins[1] - margins[3]
-    }
+
+# Drawbox Settings
+drawbox = {}
+drawbox['left_margin'] = 0
+drawbox['top_margin'] = 0
+drawbox['right_margin'] = 0
+drawbox['bottom_margin'] = 0
+drawbox['xMin'] = drawbox['left_margin']
+drawbox['yMin'] = drawbox['bottom_margin']
+drawbox['xMax'] = page_width - drawbox['right_margin']
+drawbox['yMax'] = page_width - drawbox['top_margin']
+drawbox['width'] = page_width - drawbox['left_margin'] - drawbox['right_margin']
+drawbox['height'] = page_height - drawbox['bottom_margin'] - drawbox['top_margin']
+
 
 print drawbox
 
