@@ -14,7 +14,7 @@ page_height = height()
 drawbox = {}
 drawbox['left_margin'] = 50
 drawbox['top_margin'] = 50
-drawbox['right_margin'] = 50
+drawbox['right_margin'] = 100
 drawbox['bottom_margin'] = 200
 drawbox['xMin'] = drawbox['left_margin']
 drawbox['yMin'] = drawbox['bottom_margin']
@@ -65,7 +65,7 @@ class RegisterGlyph(object):
         rect(drawbox['xMin'], drawbox['yMin'], self.glyph.width*sc, UPM*sc)
     
     def drawXHeight(self):
-        stroke(0,0,255)
+        stroke(255, 0,0)
         line((drawbox['xMin'], drawbox['yMin'] + self.xHeight_pos*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + self.xHeight_pos*sc))
     
     def drawCapHeight(self):
@@ -73,7 +73,7 @@ class RegisterGlyph(object):
         line((drawbox['xMin'], drawbox['yMin'] + self.capHeight_pos*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + self.capHeight_pos*sc))
     
     def drawBaseline(self):
-        stroke(0, 1, 0)
+        stroke(255, 0, 0)
         line((drawbox['xMin'], drawbox['yMin'] + abs(descender)*sc), (drawbox['xMin'] + self.glyph.width*sc, drawbox['yMin'] + abs(descender)*sc))
     
     def drawLeftMargin(self):
