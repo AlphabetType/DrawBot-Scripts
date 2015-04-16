@@ -3,6 +3,7 @@ from fontTools.pens.cocoaPen import CocoaPen
 # Some configuration
 page_format = 'A4' # See http://drawbot.readthedocs.org/content/canvas/pages.html#size for other size-values
 my_selection = CurrentFont() # May also be CurrentFont.selection or else
+pdf_filepath = '~/Desktop/AllMyGlyphs.pdf'
 
 # Init
 font = CurrentFont()
